@@ -1,0 +1,14 @@
+[Unit]
+Description = Gunicorn instance
+After = network.target
+
+[Service]
+User = 
+Restart = on-failure
+RestartSec = 5s
+WorkingDirectory = /home/svv/lab45
+Environment = "PATH=/home/svv/lab45/venv/bin"
+ExecStart= /home/svv/lab45/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:80 src.main:app
+
+[Install]
+WantedBy= multi-user.target
